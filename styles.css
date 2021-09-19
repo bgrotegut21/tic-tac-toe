@@ -1,0 +1,123 @@
+* {
+    padding:0;
+    margin: 0;
+    box-sizing: 0;
+}
+
+
+body {
+    background-color: rgba(0,54,77);
+
+}
+
+
+main {
+
+    display:flex;
+    justify-content: center;
+    align-content: center;
+    margin-top:300px;
+
+   
+}
+
+
+
+
+.player1, .player2 {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+
+.player2Input {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    display:none;
+
+}
+
+
+.playerSelection {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+
+.textHolders {
+    background:red;
+    width:180px;
+    height:30px;
+    line-height:30px;
+    text-align: center;
+    border-radius: 30px;
+
+
+}
+
+.holder {
+    background:rgb(58, 59, 58);
+    opacity: 1;
+    width:400px;
+    display:grid;
+    grid-template-columns: 200px 200px ;
+    grid-template-rows: 220px 40px;
+
+
+}
+
+.playerInputText {
+    background:none;
+    border:0;
+
+}
+
+
+
+.startButton {
+    width:100px;
+    height:30px;
+    border-radius:30px;
+    border:0;
+    cursor: pointer;
+
+}
+
+.select {
+    border:0;
+    width:100px;
+    height:30px;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+.humanDonut {
+    display:none;
+     
+}
+
+.computerDonut, .humanDonuts {
+    cursor:pointer
+}
+
+
+.startHolder {
+
+    grid-row-end: span 0.5;
+    grid-column-end: span 2;
+} 
+
+
+
+
+
+.startHolder {
+    display:flex;
+    justify-content: center;
+
+}
