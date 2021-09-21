@@ -12,7 +12,7 @@ body {
 
 
 main {
-
+    
     display:flex;
     justify-content: center;
     align-content: center;
@@ -21,10 +21,44 @@ main {
    
 }
 
+.donut {
+    width:80px;
+}
+
+.information {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 
 
-.player1, .player2 {
+.playerState {
+    display:flex;
+  
+    flex-direction: column;
+    align-items: center;
+    height:200px;
+}
+
+.winOrLoseState {
+    display:none;
+}
+
+.currentPlayerText {
+    margin-left:  10px;
+}
+
+.currentPlayer1, .currentPlayer2 {
+
+    width:180px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+.player1{
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -32,25 +66,36 @@ main {
 }
 
 
-.player2Input {
+
+
+
+
+
+
+
+
+.playerSelection, .player2Input {
     display:flex;
     flex-direction: column;
     align-items: center;
-    display:none;
 
+}
+
+.playerSelection {
+    display:none;
 }
 
 
 .playerSelection {
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-
+    background:green;
+}
+.playerComputer {
+    display:none;
 }
 
 
 .textHolders {
-    background:red;
+    background:white;
     width:180px;
     height:30px;
     line-height:30px;
@@ -61,12 +106,17 @@ main {
 }
 
 .holder {
-    background:rgb(58, 59, 58);
+    background: rgb(2, 81, 115);
     opacity: 1;
-    width:400px;
+    width:600px;
     display:grid;
-    grid-template-columns: 200px 200px ;
-    grid-template-rows: 220px 40px;
+    border-radius:10px;
+    color:white;
+
+
+
+    grid-template-columns: 300px 300px ;
+    grid-template-rows: 280px 40px;
 
 
 }
@@ -79,7 +129,7 @@ main {
 
 
 
-.startButton {
+.startButton,.resetButton {
     width:100px;
     height:30px;
     border-radius:30px;
@@ -94,6 +144,7 @@ main {
     height:30px;
     border-radius:30px;
     cursor:pointer;
+    margin-top: 10px;
 }
 
 .humanDonut {
@@ -101,9 +152,24 @@ main {
      
 }
 
+.playerInputText:focus {
+    outline :none;
+}
+
 .computerDonut, .humanDonuts {
     cursor:pointer
 }
+.currentPlayer2{
+    background:rgb(200, 200, 200);
+    border-radius: 10px;
+}
+
+.currentPlayer1 {
+  
+    border-radius: 10px;
+}
+
+
 
 
 .startHolder {
@@ -112,6 +178,13 @@ main {
     grid-column-end: span 2;
 } 
 
+.select, .startButton, .resetButton {
+    background: rgb(126, 155, 255);
+}
+
+.resetButton {
+    margin-top:10px;
+}
 
 
 
@@ -121,3 +194,335 @@ main {
     justify-content: center;
 
 }
+
+.grid {
+    border: 1px solid black;
+    background: url("images/donutBox.svg");
+    background-repeat: no-repeat;
+
+    height:800px;
+    width:600px;
+    
+    
+ 
+
+}
+
+.gridHolder {
+    display:flex;
+    justify-content: center;
+}
+
+.gridHolder {
+    display:none;
+}
+.information {
+
+    
+    width:290px;
+    height:250px;
+    position:relative;
+    left:130px;
+    top:110px;
+
+
+}
+
+.board {
+
+    width:290px;
+    height:250px;
+    position:relative;
+    top:180px;
+    left: 130px;
+
+    display:grid; 
+    grid-template-columns: 1fr 1fr 1fr;
+    
+
+}
+
+
+
+.peice {
+    
+    cursor: pointer;
+    
+
+
+}
+
+.pinkDonut{
+   
+    opacity:1;
+}
+
+.peice:hover{
+   background:rgb(200, 200, 200);
+}
+
+
+@media only screen and (max-width: 610px) {
+    .holder {
+        width:500px;
+
+        grid-template-columns: 250px 300px;
+    }
+
+  }
+
+
+  @media only screen and (max-width: 610px) {
+
+    .pinkDonut, .humanDonut, .computerDonut,.xDonut {
+        width:150px;
+    }
+
+    .holder {
+        width:400px;
+        grid-template-columns: 200px 200px;
+        grid-template-rows: 250px;
+    }
+
+    .startButton {
+        margin-bottom:20px;
+    }
+  }
+
+@media only screen and (max-width: 560px) {
+    .grid {
+        width:500px;
+    }
+
+    .board, .information {
+        width:240px;
+        height:190px;
+    }
+
+
+    .donut {
+        width:80px;
+        height:60px;
+       
+    }
+
+
+
+    .board {
+
+        top:210px;
+        left:120px;
+    }
+
+    .information {
+        left : 120px;
+    }
+
+  }
+
+
+  @media only screen and (max-width: 485px) {
+    .grid {
+        width:400px;
+    }
+
+    .donut {
+        width:40px;
+        height:40px;
+    }
+
+    .playerState {
+
+        height:160px;
+    }
+    .board, .information {
+        width:180px;
+        height:150px;
+    }
+
+    .peice {
+        line-height: 3em;
+    }
+
+
+
+    .board {
+        top:170px;
+        left:110px;
+    }
+
+    .information {
+        top:90px;
+        left : 110px;
+    }
+  }
+
+  @media only screen and (max-width: 500px) {
+
+
+    .pinkDonut, .humanDonut, .computerDonut,.xDonut {
+        width:100px;
+    }
+
+
+    .playerInputText {
+
+        width:100px;
+    }
+
+    .playerText {
+        font-size:large;
+    }
+    .textHolders {
+        width:130px;
+    }
+
+    .holder {
+        width:300px;
+        grid-template-columns: 140px 200px;
+        grid-template-rows: 180px;
+    }
+
+    .startButton {
+        margin-bottom:20px;
+    }
+  }
+
+  @media only screen and (max-width: 395px) {
+    .grid {
+        width:300px;
+        height:500px
+    }
+
+    .board, .information {
+        width:140px;
+        height:120px;
+    }
+
+    .donut {
+        width:25px;
+        height:25px;
+    }
+
+    .peice {
+        line-height: 2em;
+    }
+
+    .resetButton{
+        margin-top:5px;
+        width:80px;
+    }
+
+    .board {
+        top:120px;
+        left:80px;
+    }
+
+    .playerState {
+
+        width:140px;
+        height:120px;
+    }
+
+    .donut {
+        width:45px;
+    }
+
+    .currentPlayerText {
+        font-size: medium;
+    }
+
+    .currentPlayer1, .currentPlayer2 {
+
+        width:120px;
+    }
+
+
+
+    .information {
+        top:70px;
+        left : 80px;
+    }
+  }
+
+  
+
+  @media only screen and (max-width: 340px) {
+
+    .pinkDonut, .humanDonut, .computerDonut,.xDonut {
+        width:100px;
+    }
+
+    .playerInputText {
+   
+        width:80px;
+
+    }
+
+    .playerText {
+        font-size:medium;
+    }
+    .textHolders {
+        margin-top:10px;
+        width:100px;
+    }
+
+    .select {
+        width:80px;
+    }
+
+    .holder {
+        width:220px;
+        height:220px;
+        grid-template-columns: 120px;
+        grid-template-rows: 180px;
+    
+    }
+
+    .startButton {
+        margin-bottom:20px;
+    }
+  }
+
+
+
+  @media only screen and (max-width: 300px) {
+    .grid {
+        width:250px;
+        height:500px
+    }
+
+    .board, .information {
+        width:120px;
+        height:110px;
+    }
+
+    .peice {
+        line-height: 2em;
+    }
+    
+    .resetButton {
+
+        height:20px;
+        width:50px;
+        font-size: 11px;
+    }
+
+
+
+    .playerState {
+ 
+        height:110px
+    }
+
+
+    .board {
+        top:80px;
+        left:60px;
+    }
+
+    .information {
+        top:50px;
+        left : 60px;
+    }
+  }

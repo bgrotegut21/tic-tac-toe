@@ -4,14 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Gluten&display=swap');
+        </style>
     <link rel="stylesheet" href="styles.css">
+
     <title>Document</title>
 </head>
 <body>
     <main>
         <div class = "holder">
             <div class = "player1">
-                <img src="images/darkPinkDonut.svg" alt="dark plink donut" width = "150" >
+                <img class = "pinkDonut" src="images/darkPinkDonut2.svg" alt="dark plink donut" width = "200" >
                 <h2 class = "playerText">Player One</h2>
                 <div class = "textHolders">
                     <input class = "playerInputText" class ="playerInput" type="text">
@@ -22,19 +26,24 @@
 
 
                <div class = "playerSelection">
-                   <img  class = "humanDonut" src="images/humanDonut.svg" alt="human donut selction" width = "150">
-                   <img  class = "computerDonut" src="images/computerDonut.svg" alt="computer donut selection" width = "150">
-                   <h2>Player vs AI</h2>
+                   <img  class = "humanDonut" src="images/humanDonut.svg" alt="human donut selction" width = "200">
+                   <img  class = "computerDonut" src="images/computerDonut.svg" alt="computer donut selection" width = "200">
+                   <h2 class = "playerText">Player vs AI</h2>
                    <button class = "select">Select</button>
 
                </div>
                 
                 <div class = "player2Input">
-                    <img src="images/xDonut.svg" alt="dark plink donut" width = 150>
+                    <img class = "xDonut" src="images/xDonut.svg" alt="dark plink donut" width = 150>
                     <h2 class = "playerText">  Player Two</h2>
                     <div class = "textHolders">
                         <input class = "playerInputText" class ="playerInput" type="text">
                     </div>
+                </div>
+
+                <div class = "playerComputer">
+                    <img class = "xDonut" src="images/xDonut.svg" alt="dark plink donut" width = 150>
+                    <h2 class = "playerText">Computer</h2>
 
                 </div>
 
@@ -48,6 +57,65 @@
 
     </main>
 
+    <section class = "gridHolder">
+        <div class = "grid">
+            <div class = "information"> 
+                <div class = "playerState">
+                    <div class = "currentPlayer1">
+                        <img class = "donut" src="images/darkPinkDonut.svg" alt="pink donut">
+                        <h2 class = "currentPlayerText">Player1</h2>
+                    </div>
+                    <div class = "currentPlayer2">
+                        <img class = "donut" src="images/xDonut.svg" alt="xDonut">
+                        <h2 class = "currentPlayerText">Player2</h2>
+                    </div>
+                    <button class = "resetButton">Reset</button>
+                </div>
+                <div class = "winOrLoseState">
+                    <img class = "donut winOrLoseDonut"  src="images/flyingBlueDonut.svg" alt="win or lost donut">
+                    <h2 class = "winOrLoseText">You Won!</h2>
+                    <button class = "resetButton">Reset</button>
+                </div>
+            </div>
+            <div class = "board">
+
+                <div class ="peice">
+                    <img class = "pinkDonuts donut" src="images/emptyDonut.svg" alt="" width = "80">
+
+                </div>
+                <div class = "peice">
+                    <img class = "pinkDonuts donut" src="images/emptyDonut.svg" alt="" width = "80">
+                </div>
+                <div class = "peice">
+                    <img class = "pinkDonuts donut" src="images/emptyDonut.svg" alt="" width = "80">
+                </div>
+                <div class  = "peice">
+                    <img class = "pinkDonuts donut" src="images/emptyDonut.svg" alt="" width = "80">
+                </div>
+                <div class = "peice">
+                    <img class = "pinkDonuts donut" src="images/emptyDonut.svg" alt="" width = "80">
+                </div>
+                <div class = "peice">
+                    <img class = "pinkDonuts donut" src="images/emptyDonut.svg" alt="" width = "80">
+                </div>
+                <div class = "peice">
+                    <img class = "pinkDonuts donut" src="images/emptyDonut.svg" alt="" width = "80">
+                </div>
+                <div class = "peice">
+                    <img class = "pinkDonuts donut" src="images/emptyDonut.svg" alt="" width = "80">
+                </div>
+                <div class = "peice">
+                    <img class = "pinkDonuts donut" src="images/emptyDonut.svg" alt="" width = "80">
+                </div>
+            </div>
+    
+        </div>
+
+        
+    </section>
+ 
+
 </body>
-    <div class = "grid">current grid</div>
+
+
 </html>
