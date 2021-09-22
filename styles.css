@@ -4,21 +4,22 @@
     box-sizing: 0;
 }
 
-
 body {
     background-color: rgba(0,54,77);
-
+    font-family: Helvetica, Arial, sans-serif;
 }
 
-
-main {
-    
+main {    
     display:flex;
     justify-content: center;
     align-content: center;
     margin-top:300px;
+}
 
-   
+:root {
+    --darkBlue: rgb(2, 81, 115);
+    --buttonBlue: rgb(126, 155, 255);
+    --buttonPressed: rgb(104, 130, 222); 
 }
 
 .donut {
@@ -31,7 +32,9 @@ main {
     align-items: center;
 }
 
-
+.playerText {
+    margin-bottom: 10px;
+}
 
 .playerState {
     display:flex;
@@ -39,10 +42,6 @@ main {
     flex-direction: column;
     align-items: center;
     height:200px;
-}
-
-.winOrLoseState {
-    display:none;
 }
 
 .currentPlayerText {
@@ -65,34 +64,24 @@ main {
 
 }
 
-
-
-
-
-
-
-
-
-
-.playerSelection, .player2Input {
+.playerSelection, .player2Input, .playerComputer {
     display:flex;
     flex-direction: column;
     align-items: center;
 
 }
-
 .playerSelection {
+    display:flex;
+}
+
+.player2Input {
     display:none;
 }
 
 
-.playerSelection {
-    background:green;
+.computerText {
+    font-weight: lighter;
 }
-.playerComputer {
-    display:none;
-}
-
 
 .textHolders {
     background:white;
@@ -106,7 +95,7 @@ main {
 }
 
 .holder {
-    background: rgb(2, 81, 115);
+    background: var(--darkBlue);
     opacity: 1;
     width:600px;
     display:grid;
@@ -116,7 +105,7 @@ main {
 
 
     grid-template-columns: 300px 300px ;
-    grid-template-rows: 280px 40px;
+    grid-template-rows: 280px 60px;
 
 
 }
@@ -127,15 +116,12 @@ main {
 
 }
 
-
-
 .startButton,.resetButton {
     width:100px;
     height:30px;
     border-radius:30px;
     border:0;
     cursor: pointer;
-
 }
 
 .select {
@@ -145,143 +131,132 @@ main {
     border-radius:30px;
     cursor:pointer;
     margin-top: 10px;
-}
+} 
 
-.humanDonut {
-    display:none;
-     
-}
-
-.playerInputText:focus {
-    outline :none;
-}
-
-.computerDonut, .humanDonuts {
+.computerDonut, .humanDonuts {  
+    background-position: center;
     cursor:pointer
-}
+} 
+
 .currentPlayer2{
     background:rgb(200, 200, 200);
     border-radius: 10px;
 }
 
 .currentPlayer1 {
-  
     border-radius: 10px;
-}
-
-
-
+} 
 
 .startHolder {
-
     grid-row-end: span 0.5;
     grid-column-end: span 2;
 } 
 
 .select, .startButton, .resetButton {
-    background: rgb(126, 155, 255);
+    background: var(--buttonBlue)
+}
+
+.select:hover,.startButton:hover, .resetButton:hover {
+    background: var(--buttonPressed)
 }
 
 .resetButton {
     margin-top:10px;
 }
 
-
-
-
 .startHolder {
     display:flex;
     justify-content: center;
-
-}
+} 
 
 .grid {
-    border: 1px solid black;
     background: url("images/donutBox.svg");
     background-repeat: no-repeat;
-
     height:800px;
     width:600px;
-    
-    
- 
-
-}
+} 
 
 .gridHolder {
     display:flex;
     justify-content: center;
-}
+} 
 
-.gridHolder {
-    display:none;
-}
 .information {
-
-    
     width:290px;
     height:250px;
     position:relative;
     left:130px;
     top:110px;
-
-
 }
 
 .board {
-
     width:290px;
     height:250px;
     position:relative;
     top:180px;
     left: 130px;
-
     display:grid; 
     grid-template-columns: 1fr 1fr 1fr;
-    
-
 }
-
-
 
 .peice {
-    
     cursor: pointer;
-    
-
-
 }
 
-.pinkDonut{
-   
+.pinkDonut, .xDonutDisplay{  
     opacity:1;
-}
+} 
+
+.computerDonut:hover {
+    opacity: 0.8;
+} 
+
+.playerInputText:focus {
+    outline :none;
+} 
 
 .peice:hover{
-   background:rgb(200, 200, 200);
+   opacity:0.8;
 }
 
+
+
+.playerComputer {
+    display:none;
+} 
+
+.humanDonut {
+    display:none;   
+}
+
+.winOrLoseState {
+    display:none;
+} 
+
+.gridHolder {
+    display:none;
+}
+
+main {
+    display:flex;
+} 
 
 @media only screen and (max-width: 610px) {
     .holder {
         width:500px;
-
         grid-template-columns: 250px 300px;
     }
-
   }
 
-
   @media only screen and (max-width: 610px) {
-
-    .pinkDonut, .humanDonut, .computerDonut,.xDonut {
+    .pinkDonut, .humanDonut, .computerDonut,.xDonut  {
         width:150px;
     }
 
     .holder {
         width:400px;
         grid-template-columns: 200px 200px;
-        grid-template-rows: 250px;
+        grid-template-rows: 280px;
     }
 
     .startButton {
@@ -299,17 +274,12 @@ main {
         height:190px;
     }
 
-
     .donut {
         width:80px;
-        height:60px;
-       
+        height:60px;   
     }
 
-
-
     .board {
-
         top:210px;
         left:120px;
     }
@@ -332,19 +302,13 @@ main {
     }
 
     .playerState {
-
         height:160px;
-    }
+    } 
+
     .board, .information {
         width:180px;
         height:150px;
     }
-
-    .peice {
-        line-height: 3em;
-    }
-
-
 
     .board {
         top:170px;
@@ -358,13 +322,9 @@ main {
   }
 
   @media only screen and (max-width: 500px) {
-
-
     .pinkDonut, .humanDonut, .computerDonut,.xDonut {
         width:100px;
     }
-
-
     .playerInputText {
 
         width:100px;
@@ -373,13 +333,14 @@ main {
     .playerText {
         font-size:large;
     }
+
     .textHolders {
         width:130px;
     }
 
     .holder {
         width:300px;
-        grid-template-columns: 140px 200px;
+        grid-template-columns: 140px 170px;
         grid-template-rows: 180px;
     }
 
@@ -402,10 +363,6 @@ main {
     .donut {
         width:25px;
         height:25px;
-    }
-
-    .peice {
-        line-height: 2em;
     }
 
     .resetButton{
@@ -433,11 +390,8 @@ main {
     }
 
     .currentPlayer1, .currentPlayer2 {
-
         width:120px;
     }
-
-
 
     .information {
         top:70px;
@@ -448,17 +402,13 @@ main {
   
 
   @media only screen and (max-width: 340px) {
-
     .pinkDonut, .humanDonut, .computerDonut,.xDonut {
         width:100px;
     }
 
     .playerInputText {
-   
         width:80px;
-
     }
-
     .playerText {
         font-size:medium;
     }
@@ -474,11 +424,10 @@ main {
     .holder {
         width:220px;
         height:220px;
-        grid-template-columns: 120px;
+        grid-template-columns: 105px;
         grid-template-rows: 180px;
     
     }
-
     .startButton {
         margin-bottom:20px;
     }
@@ -497,24 +446,16 @@ main {
         height:110px;
     }
 
-    .peice {
-        line-height: 2em;
-    }
-    
     .resetButton {
-
         height:20px;
         width:50px;
         font-size: 11px;
     }
 
-
-
     .playerState {
- 
+
         height:110px
     }
-
 
     .board {
         top:80px;
