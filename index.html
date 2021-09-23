@@ -14,10 +14,11 @@
     <main>
         <div class = "holder">
             <div class = "player1">
+       
                 <img class = "pinkDonut" src="images/darkPinkDonut2.svg" alt="dark plink donut" width = "200" >
                 <h2 class = "playerText">Player One</h2>
                 <div class = "textHolders">
-                    <input class = "playerInputText" class ="playerInput" type="text">
+                    <input class = "playerInputText playerOneInputText"  type="text">
                 </div>
     
             </div>
@@ -25,25 +26,26 @@
                <div class = "playerSelection">
                    <img  class = "humanDonut" src="images/humanDonut.svg" alt="human donut selction" width = "200">
                    <img  class = "computerDonut" src="images/computerDonut.svg" alt="computer donut selection" width = "200">
-                   <h2 class = "playerText">Player vs AI</h2>
+                   <h2 class = "playerText stateText">Player vs AI</h2>
                    <button class = "select">Select</button>
 
                </div>
                 <div class = "player2Input">
+                 
                     <img class = "xDonut" src="images/xDonut2.svg" alt="dark plink donut" width = 200>
                     <h2 class = "playerText">  Player Two</h2>
                     <div class = "textHolders">
-                        <input class = "playerInputText" class ="playerInput" type="text">
+                        <button class = "exit">x</button>
+                        <input class = "playerInputText playerTwoInputText"  type="text">
+                        <button class = "startButton">Start</button>
                     </div>
                 </div>
                 <div class = "playerComputer">
                     <img class = "xDonut" src="images/xDonut2.svg" alt="dark plink donut" width = 200>
-                    <h2 class = "playerText">Player Two</h2>
                     <h2 class = "playerText computerText" >Computer</h2>
+                    <button class = "exitButton">Exit</button>
+                    <button class = "startButton secondStartButton"">Start</button>
                 </div>
-                </div>
-                <div class = "startHolder">
-                    <button class = "startButton">Start</button>
                 </div>
             </div>
     </main>
@@ -101,8 +103,9 @@
     
         </div>        
     </section>
-    <script src = "./emit.js"></script>
-    <script src = "selection.js"></script>
+    <script src = "scripts/emit.js"></script>
+    <script src = "scripts/elements.js"></script>
+    <script src = "scripts/select.js"></script>
 
 </body>
 

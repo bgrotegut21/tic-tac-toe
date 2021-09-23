@@ -1,7 +1,7 @@
 let elements = (
     function(){
 
-
+        let main = document.getElementsByTagName("main")[0];
         let holder = document.querySelector(".holder");
         let player1 = document.querySelector(".player1");
         let pinkDonut = document.querySelector(".pinkDonut")
@@ -36,10 +36,19 @@ let elements = (
         let board = document.querySelector(".board");
         let peice = document.querySelector(".peice");
 
+        let exit = document.querySelector(".exit")
+        let exitButton = document.querySelector(".exitButton")
+        let stateText = document.querySelector(".stateText");
+
+        let playerTwoInputText = document.querySelector(".playerTwoInputText");
+        let playerOneInputText = document.querySelector(".playerOneInputText");
+        let secondStartButton = document.querySelector(".secondStartButton")
+    
+
         return {holder,player1,pinkDonut,playerText,textHolders, playerInputText,
         player2, playerSelection,humanDonut, computerDonut, playerText, select,
         player2Input, xDonut,  playerComputer, startHolder, startButton, gridHolder,grid, information
         ,playerState,currentPlayer1,donut,currentPlayerText,currentPlayer2,resetButton,
-        board,peice}
+        board,peice,exit, exitButton, stateText, playerTwoInputText, playerOneInputText, secondStartButton,main};
     }
 )()

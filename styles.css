@@ -70,18 +70,12 @@ main {
     align-items: center;
 
 }
-.playerSelection {
-    display:flex;
-}
-
-.player2Input {
-    display:none;
-}
 
 
-.computerText {
-    font-weight: lighter;
-}
+
+
+
+
 
 .textHolders {
     background:white;
@@ -116,6 +110,10 @@ main {
 
 }
 
+.startButton {
+    margin-top:5px;
+}
+
 .startButton,.resetButton {
     width:100px;
     height:30px;
@@ -133,7 +131,7 @@ main {
     margin-top: 10px;
 } 
 
-.computerDonut, .humanDonuts {  
+.computerDonut, .humanDonut {  
     background-position: center;
     cursor:pointer
 } 
@@ -147,10 +145,6 @@ main {
     border-radius: 10px;
 } 
 
-.startHolder {
-    grid-row-end: span 0.5;
-    grid-column-end: span 2;
-} 
 
 .select, .startButton, .resetButton {
     background: var(--buttonBlue)
@@ -164,10 +158,7 @@ main {
     margin-top:10px;
 }
 
-.startHolder {
-    display:flex;
-    justify-content: center;
-} 
+
 
 .grid {
     background: url("images/donutBox.svg");
@@ -219,15 +210,37 @@ main {
    opacity:0.8;
 }
 
+.exitButton {
+    width:100px;
+    height:30px;
+    cursor:pointer;
+    border-radius: 30px;
+    border:none;
+    background-color:var(--buttonBlue);
+}
+.exitButton:hover {
+    background: var(--buttonPressed)
+}
+.playerComputer {
+    display:flex;
+} 
 
+.playerSelection {
+    display:flex;
+}
 
 .playerComputer {
     display:none;
-} 
+}
+
+.player2Input {
+    display:none;
+}
 
 .humanDonut {
     display:none;   
 }
+
 
 .winOrLoseState {
     display:none;
@@ -236,6 +249,22 @@ main {
 .gridHolder {
     display:none;
 }
+
+.exit {
+    border:none;
+    background:var(--buttonBlue);
+    cursor:pointer;
+    width:20px;
+    height:20px;
+    border-radius:100%;
+
+
+}
+
+.exit:hover {
+    background:var(--buttonPressed);
+}
+
 
 main {
     display:flex;
@@ -340,6 +369,7 @@ main {
 
     .holder {
         width:300px;
+        height:210px;
         grid-template-columns: 140px 170px;
         grid-template-rows: 180px;
     }
@@ -407,7 +437,7 @@ main {
     }
 
     .playerInputText {
-        width:80px;
+        width:60px;
     }
     .playerText {
         font-size:medium;
@@ -418,19 +448,36 @@ main {
     }
 
     .select {
+   
         width:80px;
     }
 
     .holder {
         width:220px;
-        height:220px;
-        grid-template-columns: 105px;
+        height:210px;
+        grid-template-columns: 110px 100px;
         grid-template-rows: 180px;
     
     }
     .startButton {
         margin-bottom:20px;
+       
     }
+    .exitButton {
+        width:40px;
+        margin-top:10px;
+    }
+
+    .gridHolder {
+        display:flex;
+    }
+    
+ 
+
+    .playerText {
+        font-size: small;
+    }
+    
   }
 
 
@@ -466,4 +513,5 @@ main {
         top:50px;
         left : 60px;
     }
+
   }
