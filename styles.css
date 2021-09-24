@@ -247,7 +247,7 @@ main {
 } 
 
 .gridHolder {
-    display:none;
+    display:flex;
 }
 
 .exit {
@@ -464,7 +464,6 @@ main {
        
     }
     .exitButton {
-        width:40px;
         margin-top:10px;
     }
 

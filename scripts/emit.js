@@ -11,9 +11,9 @@ let emit = (
         }
 
         function fireEvents(name,data){
+            
             if(events[name]){
                 events[name].forEach(cryOut => {
-                    console.log(cryOut);
                     cryOut(data)
                 })
             }

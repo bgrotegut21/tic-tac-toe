@@ -3,7 +3,10 @@ let select = (function (){
     let isComputer = true;
     let currentState = "selection";
 
-    let bindings = [{button: elements.computerDonut, func: _changeIcon},
+    emit.subscribe("addBindings",_addBindings);
+    emit.subscribe("removeBindings", _removeBindings);
+
+    let selectBindings = [{button: elements.computerDonut, func: _changeIcon},
                     {button: elements.humanDonut, func: _changeIcon},
                     {button: elements.select, func:_changeSelection},
                     {button: elements.exit, func: _exitState},
@@ -13,16 +16,16 @@ let select = (function (){
     ]
     let names = {};
 
-    function _addBindings(){
+    function _addBindings(bindings){
+        console.log("grid bindings")
         bindings.forEach(buttonObject => {buttonObject.button.addEventListener("click",buttonObject.func)});
     }
 
-    function _removeBindings(){
+    function _removeBindings(bindings){
         bindings.forEach(buttonObject => {buttonObject.button.removeEventListener('click',buttonObject.func)});
     }
 
     function _changeSelection (){
-        console.log("selction")
         _changeState("selection");
         isComputer? currentState = _changeState("computer",true): currentState = _changeState("player",true);
 
@@ -47,16 +50,12 @@ let select = (function (){
     }
 
     function _exitState(){
-        console.log("exit")
         _changeState(currentState);
         currentState = _changeState("selection",true);
         _renderIcons();
-
-
     }
 
     function _changeIcon(){
-        console.log("changing icons")
         isComputer? isComputer = false: isComputer = true;
         _renderIcons();
     }
@@ -78,8 +77,9 @@ let select = (function (){
         let playerTwoText = elements.playerTwoInputText.value;
         if (bool) {
             playerOneText = playerName1;
-            playerTwoText = playerName2
+            playerTwoText = playerName2 
         }
+
         if(playerOneText.length == 0 || typeof playerOneText != "string") playerOneText = "Player One"
         if(playerTwoText.length == 0 || typeof playerTwoText != "string") playerTwoText = "Player Two"
 
@@ -87,33 +87,32 @@ let select = (function (){
         !isComputer? names.playerTwo = playerTwoText: names.playerTwo = "Computer";
     }
 
-    function retrieveNames(){
-        return {names};
-    }
 
+    function _changeIsComputer (computerBool){
+        if (typeof computerBool == "boolean") isComputer = computerBool;
+    }
     //this function is meant for people who want to play the game using API!
-    function startQuickGame(player1,player2,isComputer){
-        changeIsComputer(isComputer);
-        _addNames(player1,player2);
-        _startGame();
+    function startQuickGame(player1,player2,computerBool){
+        _changeIsComputer(computerBool);
+        _addNames(player1,player2,true);
+        _startGame(true);
     }
 
   
 
-    function _startGame(){
-        console.log("starting game")
-        _addNames();
+    function _startGame(quickStart){
+         if (typeof quickStart == "object") _addNames();
         _changeState("main")
-        _removeBindings();
-
+        _removeBindings(selectBindings);
+        emit.fireEvents("retrieveNames",names);
+        emit.fireEvents("beginGame");
     }
+    //starting game
+    _addBindings(selectBindings);
 
-    function _startEvents(){
-        _addBindings();
-    }
 
-    _startEvents();
-
-    return (retrieveNames,startQuickGame)
+    return {startQuickGame}
 
 })() 
+
+

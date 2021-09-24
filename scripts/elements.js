@@ -43,12 +43,15 @@ let elements = (
         let playerTwoInputText = document.querySelector(".playerTwoInputText");
         let playerOneInputText = document.querySelector(".playerOneInputText");
         let secondStartButton = document.querySelector(".secondStartButton")
+
+        let currentPlayer1Text = document.querySelector(".currentPlayer1Text");
+        let currentPlayer2Text = document.querySelector(".currentPlayer2Text");
     
 
         return {holder,player1,pinkDonut,playerText,textHolders, playerInputText,
         player2, playerSelection,humanDonut, computerDonut, playerText, select,
         player2Input, xDonut,  playerComputer, startHolder, startButton, gridHolder,grid, information
         ,playerState,currentPlayer1,donut,currentPlayerText,currentPlayer2,resetButton,
-        board,peice,exit, exitButton, stateText, playerTwoInputText, playerOneInputText, secondStartButton,main};
+        board,peice,exit, exitButton, stateText, playerTwoInputText, playerOneInputText, secondStartButton,main, currentPlayer1Text,currentPlayer2Text};
     }
 )()
