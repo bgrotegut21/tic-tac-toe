@@ -46,6 +46,15 @@ let elements = (
 
         let currentPlayer1Text = document.querySelector(".currentPlayer1Text");
         let currentPlayer2Text = document.querySelector(".currentPlayer2Text");
+        let donut1 = document.querySelector(".donut1");
+        let donut2 = document.querySelector(".donut2");
+        let donut3 = document.querySelector(".donut3");
+        let donut4 = document.querySelector(".donut4");
+        let donut5 = document.querySelector(".donut5");
+        let donut6 = document.querySelector(".donut6");
+        let donut7 = document.querySelector(".donut7");
+        let donut8 = document.querySelector(".donut8");
+        let donut9 = document.querySelector(".donut9");
     
 
         return {holder,player1,pinkDonut,playerText,textHolders, playerInputText,
