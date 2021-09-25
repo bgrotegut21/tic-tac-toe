@@ -72,6 +72,14 @@ let select = (function (){
         }
     }
 
+    function displayErrorMessage(){
+        setTimeout(function(){
+            elements.errorMessage.style.display = "none";
+        },2000)
+        elements.errorMessage.style.display = "block";
+
+    }
+
     function _addNames (playerName1,playerName2,bool){
         let playerOneText = elements.playerOneInputText.value;
         let playerTwoText = elements.playerTwoInputText.value;
@@ -98,10 +106,16 @@ let select = (function (){
         _startGame(true);
     }
 
+
   
 
     function _startGame(quickStart){
          if (typeof quickStart == "object") _addNames();
+         if (names.playerOne.length > 10 || names.playerTwo.length > 10) {
+             names = {};
+             displayErrorMessage();
+             return;
+         }
         _changeState("main")
         _removeBindings(selectBindings);
         emit.fireEvents("retrieveNames",names);
