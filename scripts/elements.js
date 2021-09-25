@@ -59,6 +59,10 @@ let elements = (
         let errorMessage = document.querySelector(".errorMessage");
         let xDonutEl = document.querySelector(".xDonutEl");
         let pinkDonutEl = document.querySelector(".pinkDonutEl");
+        let winOrLoseState = document.querySelector(".winOrLoseState")
+        let winOrLoseDonut = document.querySelector(".winOrLoseDonut");
+        let winOrLoseText = document.querySelector(".winOrLoseText");
+
     
 
         return {holder,player1,pinkDonut,playerText,textHolders, playerInputText,
@@ -67,7 +71,7 @@ let elements = (
         ,playerState,currentPlayer1,donut,currentPlayerText,currentPlayer2,resetButton,
         board,peice,exit, exitButton, stateText, playerTwoInputText, playerOneInputText, secondStartButton,main, currentPlayer1Text,currentPlayer2Text,
         donut1, donut2, donut3, donut4, donut5, donut6, donut7, donut8, donut9, errorMessage, loseReset,
-        xDonutEl, pinkDonutEl
+        xDonutEl, pinkDonutEl, winOrLoseState, winOrLoseDonut, winOrLoseText
     };
     }
 )()

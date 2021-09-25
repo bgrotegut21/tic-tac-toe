@@ -5,6 +5,7 @@ let select = (function (){
 
     emit.subscribe("addBindings",_addBindings);
     emit.subscribe("removeBindings", _removeBindings);
+    emit.subscribe("bringBackMenu",_bringBackMenu)
 
     let selectBindings = [{button: elements.computerDonut, func: _changeIcon},
                     {button: elements.humanDonut, func: _changeIcon},
@@ -37,7 +38,7 @@ let select = (function (){
             if (state == "computer") elements.playerComputer.style.display = "flex";
             if (state == "selection") elements.playerSelection.style.display = "flex"
             if (state == "player") elements.player2Input.style.display = "flex";
-            if(state == "main") elements.main.style.display = "block";
+            if(state == "main") elements.main.style.display = "flex";
         } else {
             if (state == "computer") elements.playerComputer.style.display = "none";
             if (state == "selection") elements.playerSelection.style.display = "none"
@@ -51,6 +52,7 @@ let select = (function (){
 
     function _exitState(){
         _changeState(currentState);
+        if (currentState == "player") elements.playerTwoInputText.value = "";
         currentState = _changeState("selection",true);
         _renderIcons();
     }
@@ -106,8 +108,20 @@ let select = (function (){
         _startGame(true);
     }
 
+    function _bringBackMenu (){
+        _addBindings(selectBindings);
+        _changeState("main",true);
+        _changeState("computer");
+        _changeState("player");
+        _changeState("selection",true);
+        isComputer = true; 
+        _renderIcons();
+    }
 
-  
+    function _resetTextBoxes (){
+        elements.playerOneInputText.value = "";
+        elements.playerTwoInputText.value = "";
+    }
 
     function _startGame(quickStart){
          if (typeof quickStart == "object") _addNames();
@@ -118,13 +132,14 @@ let select = (function (){
          }
         _changeState("main")
         _removeBindings(selectBindings);
+
         emit.fireEvents("retrieveNames",names);
         emit.fireEvents("beginGame");
+        _resetTextBoxes();
+
     }
     //starting game
     _addBindings(selectBindings);
-
-
     return {startQuickGame}
 
 })() 

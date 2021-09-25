@@ -180,7 +180,7 @@ main {
 } 
 
 .gridHolder {
-    display:flex;
+    display:none;
     justify-content: center;
 } 
 
@@ -275,9 +275,15 @@ main {
     background:var(--buttonPressed);
 }
 
+.winOrLoseDonut {
+    width:150px;
+}
 
+.winOrLoseState {
 
-
+    text-align:center;
+    
+}
 
 main {
     display:flex;
@@ -348,7 +354,12 @@ main {
         width:40px;
         height:40px;
     }
-
+    .winOrLoseDonut{
+        width:110px;
+    }
+    .winOrLoseText {
+        font-size: medium;
+    }
     .playerState {
         height:160px;
     } 
@@ -409,6 +420,15 @@ main {
         height:120px;
     }
 
+    .winOrLoseDonut {
+        width:60px
+    }
+
+    .winOrLoseText {
+        font-size: smaller;
+    }
+
+
     .donut {
         width:25px;
         height:25px;
@@ -417,6 +437,12 @@ main {
     .resetButton{
         margin-top:5px;
         width:80px;
+    }
+    .loseReset {
+
+        height:20px;
+        width:50px;
+        font-size: smaller;
     }
 
     .board {
