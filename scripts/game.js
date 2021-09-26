@@ -1,5 +1,6 @@
 let game = (function(){
     let names = {}
+
     let playerOneTurn = true;
     let donutBindings = []
 
@@ -50,15 +51,43 @@ let game = (function(){
        
     }
 
- 
+    function randomAI(){
+        
+    }
+
+
+    function triggerAI(){
+        randomAI();
+        _changeTurn();
+    }
+
+    function changePlayerAI(gridIndex,mark){
+        if (playerOneTurn){
+            currentGrid[gridIndex] = mark;
+            _changeTurn()
+        }
+
+        console.log(playerOneTurn, "player One Turn")
+        if (playerOneTurn == false){
+            triggerAI();
+           
+        }
+    }
+
+
     function _changeDonut(event){
         let gridIndex = event.target.currentIndex -1;
         let mark
         playerOneTurn? mark = "O": mark ="X";
         if(currentGrid[gridIndex] == "#") {
-            currentGrid[gridIndex] = mark;
-            _changeTurn();
+            if(names.playerTwo == "Computer") {
+                changePlayerAI(gridIndex,mark);
+            } else {
+                currentGrid[gridIndex] = mark;
+                _changeTurn();
+            }
         } 
+
         _renderDonuts();
         _findWinner();
         _checkTie();
