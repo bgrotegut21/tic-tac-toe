@@ -110,7 +110,7 @@ main {
 
 
     grid-template-columns: 300px 300px ;
-    grid-template-rows: 280px 60px;
+    grid-template-rows: 280px 80px;
 
 
 }
@@ -125,14 +125,20 @@ main {
     margin-top:5px;
 }
 
-.startButton,.resetButton {
+.startButton,.resetButton, .mode, .exit {
     width:100px;
     height:30px;
     border-radius:30px;
     border:0;
     cursor: pointer;
+    background: var(--buttonBlue);
     
 }
+
+
+
+
+
 
 .select {
     border:0;
@@ -141,6 +147,7 @@ main {
     border-radius:30px;
     cursor:pointer;
     margin-top: 10px;
+    background: var(--buttonBlue);
 } 
 
 .computerDonut, .humanDonut {  
@@ -158,17 +165,14 @@ main {
 } 
 
 
-.select, .startButton, .resetButton {
-    background: var(--buttonBlue)
-}
-
-.select:hover,.startButton:hover, .resetButton:hover {
+.select:hover,.startButton:hover, .resetButton:hover, .mode:hover, .exit:hover {
     background: var(--buttonPressed)
 }
 
 .resetButton {
     margin-top:10px;
 }
+
 
 
 
@@ -260,20 +264,7 @@ main {
 
 
 
-.exit {
-    border:none;
-    background:var(--buttonBlue);
-    cursor:pointer;
-    width:20px;
-    height:20px;
-    border-radius:100%;
 
-
-}
-
-.exit:hover {
-    background:var(--buttonPressed);
-}
 
 .winOrLoseDonut {
     width:150px;
@@ -285,16 +276,19 @@ main {
     
 }
 
+.mode {
+    color:white;
+    margin-top:5px;
+}
+
+.exit {
+    margin-top:5px;
+}
+
 main {
     display:flex;
 } 
 
-@media only screen and (max-width: 610px) {
-    .holder {
-        width:500px;
-        grid-template-columns: 250px 300px;
-    }
-  }
 
   @media only screen and (max-width: 610px) {
     .pinkDonut, .humanDonut, .computerDonut,.xDonut  {
@@ -304,12 +298,9 @@ main {
     .holder {
         width:400px;
         grid-template-columns: 200px 200px;
-        grid-template-rows: 280px;
+        grid-template-rows: 300px;
     }
 
-    .startButton {
-        margin-bottom:20px;
-    }
 
     .errorMessage {
         bottom:15px;
@@ -399,14 +390,12 @@ main {
 
     .holder {
         width:300px;
-        height:230px;
+        height:250px;
         grid-template-columns: 140px 170px;
         grid-template-rows: 180px;
     }
 
-    .startButton {
-        margin-bottom:20px;
-    }
+
   }
 
   @media only screen and (max-width: 395px) {
@@ -456,7 +445,7 @@ main {
         height:120px;
     }
     .holder {
-        height: 230px;
+        height: 250px;
     }
 
     .donut {
@@ -502,7 +491,7 @@ main {
 
     .holder {
         width:220px;
-        height:240px;
+        height:250px;
         grid-template-columns: 110px 100px;
         grid-template-rows: 180px;
     

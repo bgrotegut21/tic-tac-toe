@@ -2,6 +2,7 @@ let select = (function (){
 
     let isComputer = true;
     let currentState = "selection";
+    
 
     emit.subscribe("addBindings",_addBindings);
     emit.subscribe("removeBindings", _removeBindings);
@@ -14,8 +15,10 @@ let select = (function (){
                     {button: elements.exitButton, func: _exitState},
                     {button: elements.startButton, func: _startGame},
                     {button: elements.secondStartButton, func: _startGame},
+                    {button: elements.mode, func: _changeMode},
     ]
     let names = {};
+    let isEasyMode = true;
 
     function _addBindings(bindings){
         console.log("grid bindings")
@@ -54,7 +57,14 @@ let select = (function (){
         _changeState(currentState);
         if (currentState == "player") elements.playerTwoInputText.value = "";
         currentState = _changeState("selection",true);
+        isEasyMode = false;
+        _changeMode();
         _renderIcons();
+    }
+
+    function _changeMode(){
+        isEasyMode = !isEasyMode;
+        isEasyMode == true? elements.mode.textContent = "Easy Mode": elements.mode.textContent = "Hard Mode"
     }
 
     function _changeIcon(){
@@ -132,8 +142,8 @@ let select = (function (){
          }
         _changeState("main")
         _removeBindings(selectBindings);
-
-        emit.fireEvents("retrieveNames",names);
+         let data = {names,isEasyMode}
+        emit.fireEvents("retrieveData",data);
         emit.fireEvents("beginGame");
         _resetTextBoxes();
 

@@ -1,16 +1,18 @@
 let game = (function(){
     let names = {}
 
-    let playerOneTurn = true;
+    let isPlayerOneTurn = true;
     let donutBindings = []
 
     let oImage = "images/darkPinkDonut.svg";
     let xImage = "images/xDonut.svg";
     let emptyDonutImage =  "images/emptyDonut.svg";
+    let isEasyMode;
 
 
     emit.subscribe("beginGame",_beginGame);
-    emit.subscribe("retrieveNames",_retrieveNames);
+    emit.subscribe("retrieveData",_retrieveData);
+    
     let gridBindings = [{button: elements.resetButton, func: _resetGame},
                         {button: elements.loseReset, func: _resetGame}
                         
@@ -31,8 +33,9 @@ let game = (function(){
 
  
 
-    function _retrieveNames(nameObject){
-        names = nameObject;
+    function _retrieveData(data){
+        names = data.names;
+        isEasyMode = data.isEasyMode;
     }
 
     function _displayGrid() {
@@ -51,55 +54,103 @@ let game = (function(){
        
     }
 
-    function randomAI(){
+
+    function _triggerEasyAi(){
+        let randomIndex;
+        while(currentGrid[randomIndex] != "#" && currentGrid.includes("#")) {
+            randomIndex = Math.floor(Math.random() *9);
+        }
+        currentGrid[randomIndex] = "X"
+    }
+
+
+    //o 2 on
+    //x 3 off
+
+
+    function minimax(grid, depth, isMax){
+        let cloneGrid = grid;
+        let boardValuation = evaluateWinner(cloneGrid);
+
+        if(boardValuation == 10) return boardValuation;
+        if (boardValuation == -10) return boardValuation;
+        if (boardValuation != 10 && boardValuation != -10) return 0;
+
+        if(isMax){
+            let currentValue = -Infinity
+            for (let i = 0; i < 9; i++){
+                cloneBoard[i] = "X";
+               currentValue =  Math.max(currentValue, minimax(cloneGrid, depth +1, false))
+               cloneGrid[i] = "#"
+            }
+            return currentValue
+        } else {
+            let currentValue = Infinity;
+            for(let i = 0; i<9; i++){
+                cloneGrid[i] = "X";
+                currentValue = Math.min(currentValue, minimax(cloneGrid, depth +1, true))
+                cloneGrid[i] = "#"
+            }
+            return currentValue;
+        }
+
+    }
+
+    function _triggerHardAi(){
+        let moveIndex
+        let cloneGrid = currentGrid;
+        let fillIndex;
+        console.log(cloneGrid, "clone grid")
+        for (let i = 0; i < 9; i++){
+            if (cloneGrid[i] == "#"){
+                cloneGrid[i] = "X";
+                 moveIndex = minimax(cloneGrid, 0,true)
+                cloneGrid[i] = "#"
+            }
+            if (moveIndex > -Infinity){
+                currentGrid[i] = "X";
+                break
+            }
+        }
+
         
+
     }
 
+    function markPlayer(grid, currentIndex){
+        let mark;
+        isPlayerOneTurn? mark = "O": mark ="X";
+        if (grid[currentIndex] == "#") {
+            grid[currentIndex] = mark;
+            return true;
+        } else return false;
 
-    function triggerAI(){
-        randomAI();
-        _changeTurn();
+        
+
     }
 
-    function changePlayerAI(gridIndex,mark){
-        if (playerOneTurn){
-            currentGrid[gridIndex] = mark;
-            _changeTurn()
+    function _triggerAi(currentIndex,currentMark){
+        if(isEasyMode){
+            if(currentMark) _triggerAi();
+        } else {
+           _triggerHardAi();
         }
-
-        console.log(playerOneTurn, "player One Turn")
-        if (playerOneTurn == false){
-            triggerAI();
-           
-        }
+        
     }
 
 
     function _changeDonut(event){
-        let gridIndex = event.target.currentIndex -1;
-        let mark
-        playerOneTurn? mark = "O": mark ="X";
-        if(currentGrid[gridIndex] == "#") {
-            if(names.playerTwo == "Computer") {
-                changePlayerAI(gridIndex,mark);
-            } else {
-                currentGrid[gridIndex] = mark;
-                _changeTurn();
-            }
-        } 
-
-        _renderDonuts();
-        _findWinner();
-        _checkTie();
         
+        _renderDonuts();
+       _findWinners()
     }
 
-    function _checkTie(){
+    function _checkTie(grid){
         let isTie = true;
-        currentGrid.forEach(point => {
+        grid.forEach(point => {
             if (point == "#") isTie = false;
         })
-        if (isTie) _declareWinners(isTie);
+       return isTie;
 
     }
 
@@ -111,7 +162,7 @@ let game = (function(){
     function _changePlayerShading(){
         let grey = "rgb(200,200,200)"
         let defaultColor = "rgb(228,228,228)"
-        if (playerOneTurn){
+        if (isPlayerOneTurn){
             elements.currentPlayer1.style.background = grey;
             elements.currentPlayer2.style.background = defaultColor;
         } else {
@@ -122,66 +173,59 @@ let game = (function(){
     }
 
     function _changeTurn(){
-        playerOneTurn = !playerOneTurn;
+        isPlayerOneTurn = !isPlayerOneTurn;
         _changePlayerShading();
 
     }
 
 
 
-    function _getResults (num1,num2,num3,mark){
+    function _getResults (grid,num1,num2,num3,mark){
         let isTrue =false;
-        if (currentGrid[num1] == mark && currentGrid[num2] == mark &&   currentGrid[num3] == mark) isTrue = true;
+        if (grid[num1] == mark && grid[num2] == mark &&   grid[num3] == mark) isTrue = true;
         return isTrue;
     }
 
-    function _declareWinners(playerOrTie){
-        
-        if (playerOrTie == true) displayTieScreen();
-        else displayWinnerScreen(playerOrTie);
+    function _findWinners(){
+        let playerOrTie = evaluateWinner(currentGrid);
+        if (playerOrTie == true) renderWinState("The game is a tie");
+        else if (playerOrTie == -10) renderWinState(`${names.playerOne} has won the game!`);
+        else if (playerOrTie == 10) renderWinState(`${names.playerTwo} has won the game!`);
     }
 
-    function displayWinnerScreen(playerName){
+
+    function renderWinState(text){
         elements.playerState.style.display = "none";
         elements.winOrLoseState.style.display = "block";
-        if (playerName == "Computer") elements.winOrLoseDonut.setAttribute("src","images/computerDonut.svg");
-        else elements.winOrLoseDonut.setAttribute("src","images/humanDonut.svg")
-        elements.winOrLoseText.textContent = `${playerName} has won!`
-        emit.fireEvents("removeBindings",donutBindings);
+        elements.winOrLoseDonut.setAttribute("src","images/humanDonut.svg")
+        elements.winOrLoseText.textContent = text;
+        emit.fireEvents("removeBindings",donutBindings)
         
     }
 
+    function evaluateWinner(grid){
+        if (_getResults(grid,0,1,2,"O")) return -10;
+        if (_getResults(grid,3,4,5,"O")) return -10;
+        if (_getResults(grid,6,7,8, "O")) return  -10;
+        if(_getResults(grid,0,3,6,"O")) return -10;
+        if(_getResults(grid,0,3,6,"O"))return -10;
+        if(_getResults(grid,1,4,7,"O")) return -10;
+        if(_getResults(grid,2,5,8,"O")) return -10;
+        if(_getResults(grid,0,4,8,"O")) return -10;
+        if(_getResults(grid,2,4,6,"O")) return -10;
 
 
-    function displayTieScreen(){
-        elements.playerState.style.display = "none";
-        elements.winOrLoseState.style.display = "block"
-        elements.winOrLoseDonut.setAttribute("src","images/sadDonut.svg")
-        elements.winOrLoseText.textContent = "No one has won!"
-        emit.fireEvents("removeBindings",donutBindings);
-        
-    }
+        if (_getResults(grid,0,1,2,"X")) return 10;
+        if (_getResults(grid,3,4,5,"X"))return  10;
+        if (_getResults(grid,6,7,8, "X"))return 10;
+        if(_getResults(grid,0,3,6,"X")) return 10;
+        if(_getResults(grid,0,3,6,"X")) return 10;
+        if(_getResults(grid,1,4,7,"X")) return 10;
+        if(_getResults(grid,2,5,8,"X")) return 10;
+        if(_getResults(grid,0,4,8,"X")) return 10;
+        if(_getResults(grid,2,4,6,"X")) return 10;
 
-    function _findWinner(){
-        if (_getResults(0,1,2,"O")) _declareWinners(names.playerOne);
-        if (_getResults(3,4,5,"O")) _declareWinners(names.playerOne);
-        if (_getResults(6,7,8, "O")) _declareWinners(names.playerOne);
-        if(_getResults(0,3,6,"O")) _declareWinners(names.playerOne);
-        if(_getResults(0,3,6,"O")) _declareWinners(names.playerOne);
-        if(_getResults(1,4,7,"O")) _declareWinners(names.playerOne);
-        if(_getResults(2,5,8,"O")) _declareWinners(names.playerOne);
-        if(_getResults(0,4,8,"O")) _declareWinners(names.playerOne);
-        if(_getResults(2,4,6,"O")) _declareWinners(names.playerOne);
-
-        if (_getResults(0,1,2,"X")) _declareWinners(names.playerTwo);
-        if (_getResults(3,4,5,"X")) _declareWinners(names.playerTwo);
-        if (_getResults(6,7,8, "X")) _declareWinners(names.playerTwo);
-        if(_getResults(0,3,6,"X")) _declareWinners(names.playerTwo);
-        if(_getResults(0,3,6,"X")) _declareWinners(names.playerTwo);
-        if(_getResults(1,4,7,"X")) _declareWinners(names.playerTwo);
-        if(_getResults(2,5,8,"X")) _declareWinners(names.playerTwo);
-        if(_getResults(0,4,8,"X")) _declareWinners(names.playerTwo);
-        if(_getResults(2,4,6,"X")) _declareWinners(names.playerTwo);
+        return _checkTie(grid)
     }
 
     function _renderDonuts(){
