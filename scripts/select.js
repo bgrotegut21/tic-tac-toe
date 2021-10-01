@@ -4,38 +4,38 @@ let select = (function (){
     let currentState = "selection";
     
 
-    emit.subscribe("addBindings",_addBindings);
-    emit.subscribe("removeBindings", _removeBindings);
-    emit.subscribe("bringBackMenu",_bringBackMenu)
+    emit.subscribe("addBindings",addBindings);
+    emit.subscribe("removeBindings", removeBindings);
+    emit.subscribe("bringBackMenu",bringBackMenu)
 
-    let selectBindings = [{button: elements.computerDonut, func: _changeIcon},
-                    {button: elements.humanDonut, func: _changeIcon},
-                    {button: elements.select, func:_changeSelection},
-                    {button: elements.exit, func: _exitState},
-                    {button: elements.exitButton, func: _exitState},
-                    {button: elements.startButton, func: _startGame},
-                    {button: elements.secondStartButton, func: _startGame},
-                    {button: elements.mode, func: _changeMode},
+    let selectBindings = [{button: elements.computerDonut, func: changeIcon},
+                    {button: elements.humanDonut, func: changeIcon},
+                    {button: elements.select, func:changeSelection},
+                    {button: elements.exit, func: exitState},
+                    {button: elements.exitButton, func: exitState},
+                    {button: elements.startButton, func: startGame},
+                    {button: elements.secondStartButton, func: startGame},
+                    {button: elements.mode, func: changeMode},
     ]
     let names = {};
     let isEasyMode = true;
 
-    function _addBindings(bindings){
+    function addBindings(bindings){
         console.log("grid bindings")
         bindings.forEach(buttonObject => {buttonObject.button.addEventListener("click",buttonObject.func)});
     }
 
-    function _removeBindings(bindings){
+    function removeBindings(bindings){
         bindings.forEach(buttonObject => {buttonObject.button.removeEventListener('click',buttonObject.func)});
     }
 
-    function _changeSelection (){
-        _changeState("selection");
-        isComputer? currentState = _changeState("computer",true): currentState = _changeState("player",true);
+    function changeSelection (){
+        changeState("selection");
+        isComputer? currentState = changeState("computer",true): currentState = changeState("player",true);
 
     }
 
-    function _changeState(state,bool){
+    function changeState(state,bool){
         
         if (bool){
             if (state == "computer") elements.playerComputer.style.display = "flex";
@@ -47,32 +47,30 @@ let select = (function (){
             if (state == "selection") elements.playerSelection.style.display = "none"
             if (state == "player") elements.player2Input.style.display = "none";
             if (state == "main")elements.main.style.display = "none";
-
-            
         }
         return state;
     }
 
-    function _exitState(){
-        _changeState(currentState);
+    function exitState(){
+        changeState(currentState);
         if (currentState == "player") elements.playerTwoInputText.value = "";
-        currentState = _changeState("selection",true);
+        currentState = changeState("selection",true);
         isEasyMode = false;
-        _changeMode();
-        _renderIcons();
+        changeMode();
+        renderIcons();
     }
 
-    function _changeMode(){
+    function changeMode(){
         isEasyMode = !isEasyMode;
         isEasyMode == true? elements.mode.textContent = "Easy Mode": elements.mode.textContent = "Hard Mode"
     }
 
-    function _changeIcon(){
+    function changeIcon(){
         isComputer? isComputer = false: isComputer = true;
-        _renderIcons();
+        renderIcons();
     }
 
-    function _renderIcons(){
+    function renderIcons(){
         if(isComputer){
             elements.computerDonut.style.display = "flex";
             elements.humanDonut.style.display = "none";
@@ -92,7 +90,7 @@ let select = (function (){
 
     }
 
-    function _addNames (playerName1,playerName2,bool){
+    function addNames (playerName1,playerName2,bool){
         let playerOneText = elements.playerOneInputText.value;
         let playerTwoText = elements.playerTwoInputText.value;
         if (bool) {
@@ -108,49 +106,40 @@ let select = (function (){
     }
 
 
-    function _changeIsComputer (computerBool){
-        if (typeof computerBool == "boolean") isComputer = computerBool;
-    }
-    //this function is meant for people who want to play the game using API!
-    function startQuickGame(player1,player2,computerBool){
-        _changeIsComputer(computerBool);
-        _addNames(player1,player2,true);
-        _startGame(true);
-    }
 
-    function _bringBackMenu (){
-        _addBindings(selectBindings);
-        _changeState("main",true);
-        _changeState("computer");
-        _changeState("player");
-        _changeState("selection",true);
+    function bringBackMenu (){
+        addBindings(selectBindings);
+        changeState("main",true);
+        changeState("computer");
+        changeState("player");
+        changeState("selection",true);
         isComputer = true; 
-        _renderIcons();
+        renderIcons();
     }
 
-    function _resetTextBoxes (){
+    function resetTextBox (){
         elements.playerOneInputText.value = "";
         elements.playerTwoInputText.value = "";
     }
 
-    function _startGame(quickStart){
-         if (typeof quickStart == "object") _addNames();
+    function startGame(quickStart){
+         if (typeof quickStart == "object") addNames();
          if (names.playerOne.length > 10 || names.playerTwo.length > 10) {
              names = {};
              displayErrorMessage();
              return;
          }
-        _changeState("main")
-        _removeBindings(selectBindings);
+        changeState("main")
+        removeBindings(selectBindings);
          let data = {names,isEasyMode}
         emit.fireEvents("retrieveData",data);
         emit.fireEvents("beginGame");
-        _resetTextBoxes();
+        resetTextBox();
 
     }
     //starting game
-    _addBindings(selectBindings);
-    return {startQuickGame}
+    addBindings(selectBindings);
+    
 
 })() 
 
