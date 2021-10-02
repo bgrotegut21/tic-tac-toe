@@ -123,12 +123,12 @@ let game = (function(){
     }
 
     function triggerAi(currentIndex){
+        let currentMark = markPlayer(currentIndex)
         if(isEasyMode){
-            let currentMark = markPlayer(currentIndex)
             if(currentMark) triggerEasyAi();
         } else {
            markPlayer(currentIndex)
-           _triggerHardAi();
+           if(currentMark) _triggerHardAi();
         }
     }
 
