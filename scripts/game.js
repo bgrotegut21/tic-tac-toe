@@ -9,7 +9,7 @@ let game = (function(){
 
     let playerOneImage = "images/humanDonut.svg";
     let playerTwoImage = "images/humanDonut2.svg";
-    let computerDonut = "images/computerDonut.svg";
+    let computerDonutImage = "images/computerDonut.svg";
     let sadDonut = "images/sadDonut.svg";
 
     let emptyDonutImage =  "images/emptyDonut.svg";
@@ -50,6 +50,7 @@ let game = (function(){
         elements.gridHolder.style.display = "none";
         currentGrid = ["#","#","#","#","#","#","#","#","#"];
         renderDonuts();
+        isPlayerOneTurn = true;
         emit.fireEvents("removeBindings",gridBindings);
         emit.fireEvents("bringBackMenu")
     }
@@ -182,9 +183,10 @@ let game = (function(){
 
     function findWinners(){
         let evaluatePlayer = evaluateWinner(currentGrid);
-         if (evaluatePlayer == -10) return renderWinState(`${names.playerOne} has won the game!`);
-         if (evaluatePlayer == 10) return renderWinState(`${names.playerTwo} has won the game!`);
-         if (checkTie(currentGrid) == true) return renderWinState("The game is a tie");
+         if (evaluatePlayer == -10) return renderWinState(`${names.playerOne} has won the game!`,playerOneImage);
+         if (names.playerTwo == "Computer" && evaluatePlayer == 10) return renderWinState(`${names.playerTwo} has won the game`,computerDonutImage)
+         if (evaluatePlayer == 10) return renderWinState(`${names.playerTwo} has won the game!`,playerTwoImage);
+         if (checkTie(currentGrid) == true) return renderWinState("The game is a tie", sadDonut);
     }
 
     function renderWinState(text,image){

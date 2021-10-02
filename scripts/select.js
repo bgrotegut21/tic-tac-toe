@@ -31,6 +31,8 @@ let select = (function (){
 
     function changeSelection (){
         changeState("selection");
+        isEasyMode = false;
+        changeMode();
         isComputer? currentState = changeState("computer",true): currentState = changeState("player",true);
 
     }
@@ -55,8 +57,6 @@ let select = (function (){
         changeState(currentState);
         if (currentState == "player") elements.playerTwoInputText.value = "";
         currentState = changeState("selection",true);
-        isEasyMode = false;
-        changeMode();
         renderIcons();
     }
 
