@@ -214,7 +214,7 @@ main {
     opacity:1;
 } 
 
-.computerDonut:hover {
+.computerDonut:hover, .humanDonut:hover {
     opacity: 0.8;
 } 
 
